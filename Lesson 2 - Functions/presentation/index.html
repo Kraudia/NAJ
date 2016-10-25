@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Web Applications [UAM]</title>
+
+		<meta name="author" content="Andrzej Matłosz">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<style>
+			.reveal pre code {
+				max-height: 500px;
+			}
+		</style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Nowoczesne Aplikacje Internetowe</h1>
+					<p><b>Tadeusz Makuch</b><br />tadeusz.makuch@gft.com</p>
+                    <p><b>Andrzej Matłosz</b><br />andrzej.matlosz@gft.com andrzej.matlosz@gmail.com</p>
+					<p>Materiały: <a href="https://github.com/tmakuch/UAM">https://github.com/tmakuch/UAM</a></p>
+				</section>
+
+				<section class="stack">
+				<section>
+					<h3>ES6 tips - Const</h3>
+				<pre><code>
+const a = 2;
+console.log(a); // 2
+
+a = 3; // TypeError
+</code></pre>
+				</section>
+				<section>
+					<h3>ES6 tips - Template literals</h3>
+				<pre><code>
+let name = 'Andrzej';
+let topic = 'Functions';
+
+let message = `Hello ${name},
+Today we will learn: ${topic}`;
+
+console.log(message);
+/* Hello Andrzej,
+Today we will learn: Functions */
+</code></pre>
+				</section>
+				</section>
+
+				<section>
+				<h2>Functions</h2>
+
+				<p>Functions are the very essence of JavaScript. The language is build around them.</p>
+				</section>
+				
+				<section class="stack">
+				<section>
+					<h3>Defining the function ES5</h3>
+				<pre><code>
+function funcName() {
+	//function declaration
+}
+
+var func = function () {
+	//function expression
+}
+
+(function () {
+	//IIFE
+}())</code></pre>
+				</section>
+				<section>
+					<h3>Defining the function ES6</h3>
+				<pre><code>
+let obj = {
+	x () {
+		console.log('x method');
+	},
+	y () {
+		console.log('y method');
+	}
+};
+obj.x(); // x method
+obj.y(); // y method
+
+let arr = [10, 20, 30];
+
+let arrowFunc = (param) => {
+	console.log(`arrowFunc - ${param}`);
+};
+arrowFunc('sample parameter'); // arrowFunc - sample parameter
+
+arr.forEach(item => console.log(item)); // 10 20 30;
+
+arr.forEach((item, i) => {
+	console.log(item, i); // 10 0   20 1    30 2
+});
+</code></pre>
+				</section>
+				</section>
+
+				
+
+				<section>
+					<h4>Return values</h4>
+					<pre><code>
+function sum(arg1, arg2) {
+	return arg1 + arg2;
+};
+
+const sumResult = sum(5, 4); 
+console.log(sumResult) // 9
+
+function noReturn(arg) {
+	// some operation without return
+}
+
+const noReturnResult = noReturn('param');
+console.log(noReturnResult) // undefined
+</code></pre>
+				</section>
+
+
+
+<section class="stack">
+				<section>
+					<h3>Parameters ES5</h3>
+				<pre><code>
+function foo(a, b, c) {
+	console.log(a, b, c);
+}
+
+foo(5, 6, 7); // 5 6 7
+
+foo(5, 6); // 5 6 undefined
+
+foo(5, 6, 7, 8, 9); // 8 and 9 are abandoned
+
+</code></pre>
+				</section>
+				<section>
+					<h3>Parameters ES6</h3>
+				<pre><code>
+
+function foo(a, b, ...c) {
+	console.log(a, b, c);
+};
+
+function boo(a, b, c) {
+	console.log(a, b, c);
+};
+
+foo(5, 6, 7, 8, 9); // 5 6 [7, 8, 9]
+
+boo(...[5, 6, 7]); // 5 6 7
+
+</code></pre>
+				</section>
+				<section>
+					<h3>Parameters ES6</h3>
+				<pre><code>
+
+function foo() {
+	return [1, 2, 3];
+};
+
+function boo() {
+	return {x: 7, y: 8, z: 9};
+};
+
+let [a, b, c] = foo();
+let {x, y, z} = boo();
+console.log(b); // 2
+console.log(y); // 8
+
+</code></pre>
+				</section>
+				</section>
+
+
+<section class="stack">
+				<section>
+					<h4>Arguments</h4>
+					<pre><code>
+function sumAll() {
+	let sum = 0;
+	for (let i = 0; i < arguments.length; i++) {
+	    sum += arguments[i];
+	}
+	return sum;
+};
+let sumResult = sumAll(10,11,12,13);
+console.log(sumResult); // 46
+</code></pre>
+				</section>
+				<section>
+					<h4>Arguments is not an instance of the Array type</h4>
+					<pre><code>
+function foo () {
+	let arr = arguments.slice(1); // TypeError: arguments.slice is not a function
+};
+// foo(1,2,3);
+
+function boo () {
+	let arr = Array.prototype.slice.call(arguments, 1);
+	console.log(arr[0]);
+};
+boo(10,20,30); // 20
+</code></pre>
+				</section>
+				<section>
+					<h4>ES6 workaround</h4>
+					<pre><code>
+function foo(...args) {
+	let arr = args.slice(1); // args is an instance of the Array type
+	console.log(arr[0]);
+};
+
+foo(10,20,30); // 20 
+</code></pre>
+				</section>
+				</section>
+
+
+<section class="stack">
+				<section>
+					<h3>Closure</h3>
+					<pre><code>
+var times = function (t) {
+	return function (number) {
+	    return t * number;
+	};
+};
+
+var timesTwo = times(2);
+timesTwo(5); // 10
+timesTwo(4); //8</code></pre>
+<pre><code>
+var timesThree = times(3);
+timesThree(5); // 15
+timesThree(4); // 12</code></pre>
+				</section>
+				<section>
+					<h3>Closure</h3>
+					<pre><code>
+function createMessages() {
+    let i = 0, messagesFuncs = []; 
+    for (i = 0 ; i <= 3 ; i++) {
+        messagesFuncs.push(function() {
+            console.log(i);
+        });
+    }
+    return messagesFuncs;
+}
+
+messages = createMessages();
+messages[0](); // 4
+messages[1](); // 4
+messages[2](); // 4
+</code></pre>
+				</section>
+				<section>
+					<h3>Closure - ES6 workaround by let in for loop</h3>
+					<pre><code>
+function createMessages() {
+    var messagesFuncs = []; 
+    for (let i = 0 ; i <= 3 ; i++) {
+        messagesFuncs.push(function() {
+            console.log(i);
+        });
+    }
+    return messagesFuncs
+}
+
+messages = createMessages();
+messages[0](); // 0
+messages[1](); // 1
+messages[2](); // 2
+</code></pre>
+				</section>
+				</section>
+
+				<section>
+					<h1>Exercise 1</h1>
+				</section>
+
+				<section>
+					<h2>Function context</h2>
+					<p>Is this the value of this?</p>
+				</section>
+
+				<section>
+					<pre><code>
+let obj = {
+	method () {
+	    console.log(this);
+	}
+};
+obj.method(); // obj</code></pre>
+				<pre class="fragment"><code>
+function func() {
+	console.log(this);
+};
+
+func(); // window (global object);
+				</code></pre>
+				</section>
+
+				<section>
+					<h4>Context is dynamic, depends on how the function is called</h4>
+					<pre><code>
+obj.method(); // obj
+var func = obj.method;
+
+func(); // window
+</code></pre>
+				</section>
+
+				<section>
+					<h4>Every function has its own context</h4>
+					<pre><code>
+var obj = {
+	method: function () {
+	    console.log(this);
+
+	    (function () {
+	        console.log(this);
+	    }());
+	}
+}
+obj.method(); // obj; window;</code></pre>
+				</section>
+
+				<section>
+					<h4>Context can be changed</h4>
+				<pre><code>
+let obj = {}, func = function() {
+	console.log(this);
+};
+
+func(); // window
+func.apply(obj); //obj
+func.call(obj); //obj
+
+func(); //window</code></pre>
+<pre><code>
+let func2 = func.bind(obj);
+func2(); // obj
+func2(); // obj</code></pre>
+				</section>
+
+				<section>
+					<h4>Common problems</h4>
+					<pre><code>
+let form = {
+	addSubmitAction (formElement) {
+	    formElement.addEventListener('submit', function () {
+	        this.validateData(); // !
+	    });
+	},
+	validateData () {
+	    console.log('fancy validation');
+	}
+}
+
+let formElement = {
+    events: {},
+    addEventListener(eventName, callback) {
+        this.events[eventName] = callback;
+    },
+    raiseEvent(eventName) {
+        let func = this.events[eventName];
+        func();
+    }
+}
+form.addSubmitAction(formElement);
+formElement.raiseEvent('submit');</code></pre>
+				</section>
+
+				<section>
+					<h4>Solutions</h4>
+					<pre><code>
+let form = {
+	addSubmitAction (formElement) {
+	    formElement.addEventListener('submit', function () {
+	        this.validateData();
+	    }.bind(this));
+	},
+	validateData () {
+	    console.log('fancy validation');
+	}
+}</code></pre>
+				</section>
+
+				<section>
+					<pre><code>
+let form = {
+	addSubmitAction (formElement) {
+		const self = this;
+		formElement.addEventListener('submit', function () {
+			self.validateData();
+		});
+	},
+	validateData () {
+	    console.log('fancy validation');
+	}
+}</code></pre>
+				</section>
+
+				<section>
+					<pre><code>
+let form = {
+	addSubmitAction (formElement) {
+	    formElement.addEventListener('submit', () => {
+	        this.validateData();
+	    });
+	},
+	validateData () {
+	    console.log('fancy validation');
+	}
+}</code></pre>
+				</section>
+
+				<section>
+					<pre><code>
+let controller = {
+	makeRequest: () => {
+	    this.helper(); // this = Window !!!
+	},
+	helper: ()=> {
+	    console.log('helper');
+	}
+}
+
+controller.makeRequest();</code></pre>
+				</section>
+
+				<section>
+				<h1>Exercise 2</h1>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				width: 1600,
+				height: 1000,
+
+				theme: 'night', // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
