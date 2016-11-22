@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <title>Piaskownica - HTML</title>
+        <meta charset="utf-8"/>
+        <style type="text/css">
+            body {
+                padding: 20px;
+            }
+            body > * {
+                vertical-align: top;
+            }
+            .box {
+                display: inline-block;
+                position: relative;
+            }
+            .box--bordered {
+                padding: 40px;
+                border: 3px dotted black;
+            }
+            .box--titled:before {
+                position: absolute;
+                top: -20px;
+                left: 0;
+            }
+            #box1:before {
+                content: 'Pudło 1';
+            }
+            #box2:before {
+                content: 'Pudło 2';
+            }
+        </style>
+    </head>
+    
+    <div id="box1"
+         class="box box--bordered box--titled">
+        <div id="box2"
+             class="box box--bordered box--titled">
+            <button id="btn">Guzik</button>
+        </div>
+    </div>
+    
+    <script src="index.js"></script>
+</html>
