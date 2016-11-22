@@ -1,0 +1,17 @@
+Celem zadania jest stworzenie prostej aplikacji-listy.
+Strona ma zawieraæ dwa elementy:
+ - 'panel' dodawania elementów do listy,
+ - listê nienumerowan¹, która bêdzie wyœwietlaæ dodane elementy z przyciskami umo¿liwiaj¹cymi usuniêcie poszczególnej pozycji.
+Strona nie musi byæ wystylowana.
+
+Historyjki:
+Jako u¿ytkownik jestem w stanie dodaæ nowy element do listy.
+Krytertia:
+ - strona udostêpnia pole tekstowe i przycisk,
+ - naciœniêcie przycisku dodaje wprowadzony tekst to listy,
+ - naciœniêcie przycisku gdy nie ma wprowadzonego tekstu (pole jest puste) nic nie dodaje do listy.
+
+Jako u¿ytkownik jestem w stanie usun¹æ istniej¹ce elemnty z listy.
+Kryteria:
+ - ka¿dy element na liœcie ma swój dedykowany przycisk,
+ - naciœniêcie przycisku powoduje usuniêcie danej pozycji z listy.

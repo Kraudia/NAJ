@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Nowoczesne Aplikacje Internetowe [UAM]</title>
+
+		<meta name="author" content="Tadeusz Makuch">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+        <style type="text/css">
+            h1, h2, h3, h4, h5, h6 {
+                font-family: Calibri !important;
+                font-weight: 600 !important;
+            }
+            
+            .column-2 {
+                display: inline-block !important;
+                width: calc(40% - 50px) !important;
+            }
+            .column-2 > :first-child {
+                list-style-type: none !important;
+                font-size: 1.7em !important;
+            }
+        </style>
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Nowoczesne Aplikacje Internetowe</h1>
+                    <h3>Style CSS</h3>
+					<p><b>Tadeusz Makuch</b><br />tadeusz.makuch@gft.com</p>
+                    <p><b>Andrzej Matłosz</b><br />andrzej.matlosz@gmail.com</p>
+					<p>Materiały: <a href="https://github.com/tmakuch/UAM">https://github.com/tmakuch/UAM</a></p>
+				</section>
+
+                <section class="stack">
+                    <section>
+                        <h1>Cascading Style Sheets</h1>
+                        <ul>
+                            <li>Opisuje wygląd stron internetowych.</li>
+                            <li>Pozwala na rozdzielenie zawartości i wyglądu dokumentu.</li>
+                            <li>Jeden dokument może być przedstawiony na kilka sposobów.</li>
+                        </ul>
+                    </section>
+                    
+                    <section>
+                        <h3>Wykorzystanie</h3>
+                        <ul>
+                            <li>Na elemencie - <pre><code><div style="{color:red;}"></div></code></pre></li>
+                            <li>Wewnętrzne - <pre><code><style>div { color:red; }</style></code></pre></li>
+                            <li>Zewnętrzne - <pre><code><link rel="stylesheet" type="text/css" href="divColor.css"></code></pre></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Kaskadowanie</h3>
+                        <img style="text-align: center"
+                             src="img/css_cascade.gif" alt=""/>
+                    </section>
+                </section>
+                <section class="stack">
+                    <section>
+                        <h3>Identyfikatory vs klasy</h3>
+                        <ul class="column-2">
+                            <li>Identyfikator</li>
+                            <li>Może być wykorzystany tylko jeden raz.</li>
+                            <li>Selektor: <pre><code>#id</code></pre></li>
+                            <li>Użycie: <br/><pre><code>
+<div id="identyfikator"></div>
+
+#identyfikator {
+...
+}
+                            </code></pre></li>
+                        </ul>
+                        <ul class="column-2">
+                            <li>Klasa</li>
+                            <li>Może być wykorzystana kilkukrotnie</li>
+                            <li>Selektor: <pre><code>.className</code></pre></li>
+                            <li>Użycie: <br/><pre><code>
+<div class="klasa1"></div>
+
+.klasa1 {
+...
+}
+                            </code></pre></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Dziedziczenie</h3>
+                        <p>Elementy dzieci dziedziczą od swojego rodzica pewne aspekty wyglądu</p>
+                        <ul>
+                            <li>Właściwości tekstu (font, line-height, text-align itd.)</li>
+                            <li>Właściwości listy (list-style, list-style-type, list-style-image itd.)</li>
+                            <li>Kolor</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Zagnieżdżanie</h3>
+                        <p>Style pozwalają definiować relację rodzic-dziecko (niestety i na szczęście tylko w tym kierunku)</p>
+                        <pre><code>
+article {
+    font-size: 12px;
+}
+article header {
+    font-size: 18px;
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Grupowanie</h3>
+                        <p>Identyczne style mogą zostać zgrupowane</p>
+                        <pre><code>
+h1, h2, h3, h4, h5, h6 {
+    color: red;
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Pseudoklasy</h3>
+                        <p>Specjalne selektory pozwalające wybrać elementy na podstawie ich pozycji, stanu lub innych reguł</p>
+                        <pre><code>
+:first-child {}
+:nth-child(2n+1) {} //nieparzyste
+:nth-child(3) {} // trzeci element
+:not(.klasa1) {} //negacja przekazanego selektora tu, każdy element bez klasy .klasa1
+:active, :hover, :visited {} //odpowiednie stany linku
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Pseudoelementy</h3>
+                        <p>Specjalne selektory określające pewne części elementów</p>
+                        <pre><code>
+:first-letter {} 
+:first-line {}
+:before {}
+:after {}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Selektory zaawansowane</h3>
+                        <ul>
+                            <li>.parent > .child - bezpośrednie dzieci</li>
+                            <li>.element + .sibling-element - bezpośrednie rodzeństwo</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Specifity</h3>
+                        <p>Zasady, które wykorzystuje przeglądarka poprzez rozwiązywania konfliktów pomiędzy dwoma stylami wskazującymi na ten sam element.</p>
+                        <h4>Sposób liczenia</h4>
+                        <img src="img/specificity.png">
+                    </section>
+                </section>
+                <section class="stack">
+                    <section>
+                        <h3>Wybrane właściwości</h3>
+                        <ul>
+                            <li>color: #000|rgba(0,0,0,1)|black;</li>
+                            <li>background-color: #fff|rgba(255,255,255,1)|white;</li>
+                            <li>background-image: url("moje_tlo.jpg");</li>
+                            <li>background: [background-color] [background-image] [background-repeat] [background-position];</li>
+                            <li>font-size: 1px|1%|1vh|1em;</li>
+                            <li>font-family: 'Times New Roman'|...;</li>
+                            <li>word-wrap: normal|break-word;</li>
+                            <li>text-align: left|center|right|justify;</li>
+                            <li>overflow: auto|scroll|hidden|visible;</li>
+                        </ul>
+                        <p>float, box-shadow, text-shadow, line-height, transition, transform i wiele innych</p>
+                    </section>
+                    <section>
+                        <h3>Box Model</h3>
+                        <img src="img/box-model.gif">
+                    </section>
+                    <section>
+                        <h3>Box Model</h3>
+                        <ul>
+                            <li>margin-top: 1px|1%|1vh</li>
+                            <li>margin: [margin-top] [margin-right] [margin-bottom] [margin-left];</li>
+                            <li>border-width: 1px|1%|1vh</li>
+                            <li>border-color: [color];</li>
+                            <li>border-style: solid|dotted|...</li>
+                            <li>border: [border-color] [border-color] [border-style]</li>
+                            <li>padding-top: 1px|1%|1vh</li>
+                            <li>padding: [padding-top] [padding-right] [padding-bottom] [padding-left]</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Box Model</h3>
+                        <ul>
+                            <li>width: 1px|1%|1vh</li>
+                            <li>height: 1px|1%|1vh</li>
+                            <li>box-sizing: content-box|border-box</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Właściwość - display</h3>
+                        <ul>
+                            <li>display: inline; - wyświetlanie w linii</li>
+                            <li>display: block; - pudełko posiadające swoje wymiary, zajmujące całą szerokość, łamiące linie</li>
+                            <li>display: inline-block; - pudełko w linii, posiada swoje wymiary, ale nie zajmuje całej szerokości</li>
+                            <li>display: flex|table|grid(?)|...</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Flexbox - display:flex</h3>
+                        <ul>
+                            <li>Dynamiczne pozycjonowanie elmentów</li>
+                            <li>Pozwala umieszczać jeden element po drugim</li>
+                            <li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">https://css-tricks.com/snippets/css/a-guide-to-flexbox/</a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Właściwość - position</h3>
+                        <ul>
+                            <li>position: static;</li>
+                            <li>position: relative;</li>
+                            <li>position: absolute;</li>
+                            <li>position: fixed;</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Pozycjonowanie</h3>
+                        <ul>
+                            <li>top: 1px|1%|1vh;</li>
+                            <li>right: 1px|1%|1vh;</li>
+                            <li>bottom: 1px|1%|1vh;</li>
+                            <li>left: 1px|1%|1vh;</li>
+                            <li>z-index: 1;</li>
+                        </ul>
+                    </section>
+                </section>
+                <section class="stack">
+                    <section>
+                        <img src="img/less.jpg">
+                    </section>
+                    <section>
+                        <h3>Prekompilator Less</h3>
+                        <ul>
+                            <li>Superset CSSu</li>
+                            <li>Wymaga kompilacji przed umieszczeniem w przeglądarce</li>
+                            <li>Szerokie wsparcie - IDE, grunt/gulp, node</li>
+                        </ul>
+                        <p>npm install -g less</p>
+                        <p>lessc input.less output.css</p>
+                    </section>
+                    <section>
+                        <h3>Dlaczego nie vanilla CSS?</h3>
+                        <ul>
+                            <li>Zmienne (stary argument)</li>
+                            <li>Czytelniejsze zagnieżdżanie</li>
+                            <li>Mixins</li>
+                            <li>Kompilacja CSS (tym samym możliwość mimifikacji, lepszej dokumentacji)</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Zagnieżdżanie</h3>
+                        <p>CSS:</p>
+                        <pre><code>
+p .elem1 { ... }
+p .elem2 { ... }
+p .elem2 > .elem3 { ... }
+                        </code></pre>
+                        <p>LESS:</p>
+                        <pre><code>
+p {
+    .elem1 {
+        ...
+    }
+    .elem2 {
+        ...
+        > .elem3 {
+            ...
+        }
+    }
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Parent selector</h3>
+                        <pre><code>
+.box {
+    :hover { ... } // .box :hover
+    &:hover { ... } // .box:hover
+    &__header { ... } // .box__header
+    & &__header { ... } // .box .box__header
+}
+                        </code></pre>
+                        <pre class="fragment"><code>
+.form {
+    .box {
+        & > & { ... } // .form .box > .form .box
+    }
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Zmienne</h3>
+                        <pre><code>
+@dim: 20px;
+
+.box {
+    width: @dim;
+    height: @dim;
+    margin: @dim/2;
+}
+
+//result
+.box {
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Mixins</h3>
+                        <pre><code>
+.red {
+    color:red;
+}
+.header {
+    .red();
+}
+
+//result
+.red {
+    color:red;
+}
+.header {
+    color:red;
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Mixins - ukrywanie</h3>
+                        <pre><code>
+.red() {
+    color:red;
+}
+.header {
+    .red();
+}
+
+//result
+.header {
+    color:red;
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Mixins - przestrzenie nazw</h3>
+                        <pre><code>
+.colored() {
+    .red {
+        color:red;
+    }
+    .green {
+        color:green;
+    }
+}
+.header {
+    .colored.red();
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Mixins - funkcje</h3>
+                        <pre><code>
+.colored(@color, @bgColor) {
+    color: @color;
+    background-color: @bgColor;
+}
+.header {
+    .colored(red, white);
+}
+
+//result
+.header {
+    color: red;
+    background-color: white;
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Mixins - funkcje i domyślne argumenty</h3>
+                        <pre><code>
+.colored(@color: red, @bgColor: white) {
+    color: @color;
+    background-color: @bgColor;
+}
+.header {
+    .colored(green);
+}
+
+//result
+.header {
+    color: green;
+    background-color: white;
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>@import</h3>
+                        <pre><code>
+    //commons/variables.less
+    @bgColor: gray;
+
+    //main.less
+    @import 'commons/variables'
+    body {
+        background: @bgColor;
+    }
+
+    //result
+    body {
+        background: gray;
+    }
+                        </code></pre>
+                    </section>
+                </section>
+                <section>
+                    <h3>Dobre praktyki - BEM</h3>
+                    <p>Konwencja nazywania elementów i ich składowych.</p>
+                    <h3>blok__skladowa--modifikator</h3>
+                    <pre class="fragment"><code>
+.box {}
+.box__header {}
+.box--decorated {}
+
+.form-box__section-header--important {}
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Prace domowe</h3>
+                    <p>znajdują się w folderach code/homework1 i code/homework2, wymagają odpowiednio odwzorowania stylu stronu i stworzenia prostej aplikacji listy.</p>
+                    <p>W podanych folderach znajdują się wizualizacje/dokładny opis zadania.</p>
+					<br/>
+					<p>Termin na oddanie zadań - 30 listopada</p>
+                </section>
+			</div>
+
+		</div>
+        
+        
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				width: 1920,
+				height: 1200,
+
+				theme: 'night', // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
