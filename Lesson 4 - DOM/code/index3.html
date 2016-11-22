@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Klaudia</title>
+	<meta charset="utf-8">
+	<style type="text/css"></style>
+</head>
+<body>
+
+
+	<button id="btnDodaj">Dodaj nowy element</button>
+	<ol id="lista">
+		<li>Element 1</li>
+		<li>Element 2</li>
+		<li>Element 3</li>
+	</ol>
+	<button id="btnUsun">Usuń ostatni element</button>
+
+	<script type="text/javascript">
+		let btnDodaj = document.querySelector('#btnDodaj'),
+		btnUsun = document.querySelector('#btnUsun'),
+		olEl = document.querySelector('ol');
+
+		function Dodaj() {
+			console.log("Dodano nowy element");
+			var liEl = document.createElement('li');
+			liEl.textContent = ' nowy element';
+			olEl.appendChild(liEl);
+		}
+
+		function Usun() {
+			console.log("Usunięto ostatni element");
+			let lastEl = olEl.lastChild;
+			olEl.removeChild(lastEl);
+		}
+
+		btnDodaj.addEventListener('click', Dodaj);
+		btnUsun.addEventListener('click', Usun);
+	</script>
+</body>
+</html>
