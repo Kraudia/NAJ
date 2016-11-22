@@ -1,0 +1,42 @@
+/* piaskownica 1 */
+
+.box .text {
+	color: green;
+}
+/*0011*/
+
+.box p {
+	color: red;
+	background-color: blue;
+}
+/*0020*/
+
+ul > :nth-child(2n+1) {
+	color: red;
+}
+/*
+ul > :nth-child(2n+1):first-element {
+	background: grey;
+}*/
+
+.box {
+	background: grey;
+}
+
+.box.div-box {
+	background: yellow;
+}
+
+/* piaskownica 2 */
+
+.box:before {
+	content: 'Tutaj jest tekst';
+}
+
+.box:after {
+	content: '!';
+	display: block;
+	width: 100px;
+	height: 100px;
+
+}

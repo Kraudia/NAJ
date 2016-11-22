@@ -1,0 +1,44 @@
+/* piaskownica 3 */
+
+/*
+.div-box {
+	position: absolute;
+	right: 0;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	background: rgba(255,0,0,0.9);
+}
+*/
+
+/* piaskownica 4 */
+
+/*
+.box {
+	position: absolute;
+	right: 0;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	background: rgba(255,0,0,0.9);
+}
+
+.div-box {
+	z-index: 2;
+}
+*/
+
+/* piaskownica 5 */
+
+.box:not(.div-box) {
+	height: 100000px;
+}
+
+.div-box {
+	position: fixed; /*absolute*/
+	bottom: 0;
+}
+
+body {
+	position: relative;
+}
