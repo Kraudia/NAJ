@@ -39,6 +39,20 @@ span {
 	padding-right: 20px;
 }
 
-span > .model {
+li:nth-child(2n) {
+    background-color: Azure;
+}
 
+button {
+    border: none;
+}
+
+button:hover {
+    background-color: black;
+    color: white;
+}
+
+li:hover {
+    background-color: grey;
+     font-weight: bold;
 }
