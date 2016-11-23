@@ -1,10 +1,10 @@
 function readCar() {
     var modelCar = document.querySelector('#modelCar');
-    var markaCar = document.querySelector('#markaCar');
+    var modelCarSelect = document.querySelector('#models');
     
     return {
         model: modelCar.value,
-        marka: markaCar.value,
+        marka: modelCarSelect.value,
     };
 }
 
