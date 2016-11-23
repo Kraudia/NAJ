@@ -1,3 +1,51 @@
+body {
+    margin: 0;
+    padding: 20px;
+}
+
 .row {
     display: block;
+    width: 100%;
+    margin: 0;
+    position: relative;
+}
+
+.column {
+	float: left;
+	padding: 25px;
+	width: 45%;
+	align: center;
+}
+
+.column:nth-child(1) {
+	border-radius: 25px;
+	background-color: grey;
+}
+
+.column:nth-child(1) > h1 {
+	background-color: black;
+	border-top-left-radius: 25px;
+	border-top-right-radius: 25px;
+	color: white;
+	margin: -25px;
+	margin-bottom: 20px;
+	padding: 20px;
+}
+
+.column:nth-child(2) {
+    border: 3px solid black;
+	background-color: DarkGreen;
+	color: white;
+}
+
+.column:nth-child(2) > h1 {
+	background-color: orange;
+	color: white;
+	margin: -25px;
+	margin-bottom: 20px;
+	padding: 20px;
+}
+
+.column:nth-child(2) > p::first-line {
+ 	font-weight:bold;
 }
