@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="description" content="Exam Cars">
+		<meta name="keywords" content="HTML,CSS,JavaScript">
+		<meta name="author" content="Klaudia Wereniewicz, s407323">
+		<title>Exam Cars</title>
+		<link type="text/css" rel="stylesheet" href="css/style.css"/>
+	</head>
+
+	<body>
+		<div class="row">
+	        <div class="column">
+	            <h1>Dodawanie</h1>
+
+	            <div style="float:left;margin-right:20px;">
+			        <label for="modelCar">Model</label>
+			        <input id="modelCar" type="text" value=""></input>
+			    </div>
+
+			    <div style="float:left;margin-right:20px;">
+			        <label for="markaCar">Marka</label>
+			        <input id="markaCar" type="text" value=""></input>
+			    </div>
+
+			    <div>
+			    	<label>&nbsp;</label>
+			    	<button id="addCar">Dodaj</button>
+			    </div>
+	        </div>
+
+	        <div class="column">
+	            <h1>Samochody</h1>
+	            <div class="car-list">
+			        <ul id="carList"></ul>
+			    </div> 
+	        </div>
+	    </div>
+    </div>
+
+        <span id="leftTasks"></span>
+        <button id="clearTasks">Clear all</button>
+	</body>
+
+	<script type="text/javascript" src="js/templates.js"></script>
+	<script type="text/javascript" src="js/readDOM.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+</html>

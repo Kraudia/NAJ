@@ -1,0 +1,44 @@
+
+ul {
+	list-style-type: none;
+}
+
+input, label, .addCar {
+    display:block;
+}
+
+.row {
+    display: block;
+    width: 100%;
+    margin: 0;
+    position: relative;
+}
+
+.column {
+	width: 100%;
+}
+
+.column > h1 {
+	font-size: 15px;
+	border-bottom: 1px solid grey;
+}
+
+.deleteTask {
+    color: red;
+    border: none;
+    background: none;
+   	margin-left: 10px;
+}
+
+.deleteTask:hover {
+    font-weight: bold;
+}
+
+span {
+	width: 200px;
+	padding-right: 20px;
+}
+
+span > .model {
+
+}
