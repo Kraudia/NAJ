@@ -10,16 +10,22 @@ window.addEventListener('DOMContentLoaded', function () {
         carDomElement.innerHTML = template;
         carList.appendChild(carDomElement);
 
+
+        var countCars = document.querySelector("#countCars");
+	    countCars.textContent = "Wszystkie: " + document.querySelectorAll('li').length;
+
+
         //usuniecie wybranego elementu listy
 			var deleteCar = carDomElement.querySelector('.deleteCar');
 	    	deleteCar.addEventListener('click', function() {
-	        var index = cars.indexOf(newCar);
-	        
-	        if (index >= 0) {
-	        	cars.splice(index, 1);
-	        }
+		        var index = cars.indexOf(newCar);
+		        
+		        if (index >= 0) {
+		        	cars.splice(index, 1);
+		        }
 
-	        carList.removeChild(carDomElement);
+		        carList.removeChild(carDomElement);
+		        countCars.textContent = "Wszystkie: " + document.querySelectorAll('li').length;
 	    	});
 	});
 
