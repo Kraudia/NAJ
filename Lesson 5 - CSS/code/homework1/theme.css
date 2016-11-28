@@ -6,20 +6,24 @@ body {
 .row {
     display: block;
     width: 100%;
-    margin: 0;
-    position: relative;
+    clear: both;
+}
+
+.row:nth-child(2) {
+	text-align: center;
 }
 
 .column {
-	float: left;
-	padding: 25px;
-	width: 45%;
 	align: center;
+	width: 41%;
+	float:left;
+	padding: 40px 40px 10px 40px;
 }
 
 .column:nth-child(1) {
 	border-radius: 25px;
-	background-color: grey;
+	background-color: #DDDDDD;
+	margin-right: 30px;
 }
 
 .column:nth-child(1) > h1 {
@@ -27,25 +31,46 @@ body {
 	border-top-left-radius: 25px;
 	border-top-right-radius: 25px;
 	color: white;
-	margin: -25px;
-	margin-bottom: 20px;
+	margin: -40px -40px 20px -40px;
 	padding: 20px;
+}
+
+.column:nth-child(1)  > p:first-letter {
+	font-size: 200%;
 }
 
 .column:nth-child(2) {
     border: 3px solid black;
 	background-color: DarkGreen;
 	color: white;
+	box-shadow: 10px 10px 5px #888888;
 }
 
 .column:nth-child(2) > h1 {
 	background-color: orange;
 	color: white;
-	margin: -25px;
-	margin-bottom: 20px;
+	margin: -40px -40px 20px -40px;
 	padding: 20px;
 }
 
 .column:nth-child(2) > p::first-line {
  	font-weight:bold;
+ 	text-shadow: -3px 3px 5px white;
+}
+
+.row:nth-child(2) > h1 {
+	padding: 20px;
+}
+
+.row:nth-child(2) > h1 {
+	padding: 20px;
+}
+
+.row:nth-child(2) > p:before {
+    background-image: url('cat.jpg');
+    background-size: 50px 50px;
+    display: inline-block;
+    width: 50px; 
+    height: 50px;
+    content:"";
 }
