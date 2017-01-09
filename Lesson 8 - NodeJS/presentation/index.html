@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Nowoczesne Aplikacje Internetowe [UAM]</title>
+		<meta name="author" content="Tadeusz Makuch">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+        <style type="text/css">
+            h1, h2, h3, h4, h5, h6 {
+                font-family: Calibri !important;
+                font-weight: 600 !important;
+            }        
+            .column-2 {
+                display: inline-block !important;
+                width: calc(40% - 50px) !important;
+            }
+            .column-2 > :first-child {
+                list-style-type: none !important;
+                font-size: 1.7em !important;
+            }
+        </style>
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Nowoczesne Aplikacje Internetowe</h1>
+                    <h3>Node.js and Express</h3>
+					<p><b>Tadeusz Makuch</b><br />tadeusz.makuch@gft.com</p>
+                    <p><b>Andrzej Matłosz</b><br />andrzej.matlosz@gmail.com</p>
+					<p>Materiały: <a href="https://github.com/tmakuch/UAM">https://github.com/tmakuch/UAM</a></p>
+				</section>
+
+				<section class="stack">
+					<section>
+						<h3>Przygotowania:</h3>
+						<ul>
+							<li>Node.js</li>
+							<li>npm install -g nodemon</li>
+							<li>npm install -g node-inspector</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Disclaimer</h2>
+						<p>Na dzień dzisiejszy (2017.01.04) node-inspector nie działa.</p>
+						<p>Hotfix: <br/>
+							Node v6.3.1 lub <a href="https://github.com/node-inspector/node-inspector/issues/905#issuecomment-268738362">drobna zmiana w kodzie</a>
+						</p>
+					</section>
+				</section>
+
+				<section class="stack">
+					<section>
+						<img src="img/nodejs.png"
+							style="background:none; border:none;"
+							height="300"/>
+						<p>Środowisko uruchomieniowe:</p>
+						<ul>
+							<li>oparte na silniku V8</li>
+							<li>oparte o zdarzenia</li>
+							<li>oparte o operacje asynchroniczne</li>
+							<li>z dużą społecznością</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Wsparcie es6</h3>
+						<img src="img/es6_node.jpg"/><br/>
+						<a href="http://node.green/"><small>Źródło</small></a>
+					</section>
+					<section>
+						<img src="img/nodejs_system.jpg"/>
+					</section>
+					<section>
+						<h3>Biblioteczki - plusy i minusy</h3>
+						<p><a href="https://github.com/finnp/knock-knock-jokes">https://github.com/finnp/knock-knock-jokes</a></p>
+						<p>vs</p>
+						<p>left-pad (marzec 2016)</p>
+					</section>
+					<section>
+						<h3>Czy mogę tworzyć własne biblioteki?</h3>
+						<p><strong>TAK!</strong></p>
+						<br/><br/>
+						<p><a href="https://gist.github.com/coolaj86/1318304">https://gist.github.com/coolaj86/1318304</a></p>
+						<br/>
+						<p>Wersja tl/dr: <code><pre>npm publish</pre></code></p>
+					</section>
+					<section>
+						<h3>Przykład przydatnej biblioteczki - minimist</h3>
+						<pre><code>
+// node example/parse.js -x 3 -y 4 -n5 -abc --beep=boop foo bar baz
+const argv = require('minimist')(process.argv.slice(2));
+						</code></pre><pre><code>
+console.log(process.argv.slice(2));
+// ['-x', '3', '-y', '4', '-n5', '-abc',
+// '--beep=boop', 'foo', 'bar', 'baz']
+						</code></pre><pre><code>
+console.log(argv);
+// { _: [ 'foo', 'bar', 'baz' ],
+// 	 x: 3,
+//	 y: 4,
+//	 n: 5,
+//	 a: true,
+//	 b: true,
+//	 c: true,
+//	 beep: 'boop' }
+						</code></pre>
+					</section>
+					<section>
+						<h3>Przykład przydatnej biblioteczki - lodash</h3>
+						<pre><code>
+const _ = require('lodash');
+const data = [ { name: 'Book 1', count: 5 }];
+
+_(data).filter(count => count > 0).map('name').value();
+// ok, es6 ma filter i map, ale lodash zawiera wiele zabezpieczeń,
+// których brakuje natywnym funkcjom.
+// Ponadto nadal rozszerza w dużym stopniu funkcjonalność JS.
+						</code></pre>
+					</section>
+					<section>
+						<h3>Zadanie</h3>
+						<ol>
+							<li>
+								Napisać program, który powita wszystkie przekazane argumenty.
+								<pre><code>
+node greet World Universe
+// Hello World, Universe!
+</code></pre>
+							</li>
+							<li>
+								Może ignorować argumenty.
+								<pre><code>
+node greet Oceans Earth World
+--ignore Earth --ignore Oceans
+// Hello World!
+</code></pre>
+							</li>
+							<li>
+								Może nie pozdrowić nikogo.
+								<pre><code>
+node greet World --no-greeting
+// Shhh!
+</code></pre>
+							</li>
+						</ol>
+					</section>
+				</section>
+				<section class="stack">
+					<section>
+						<img src="img/express.png"
+							 style="background:none; border:none;"/>
+					</section>
+					<section>
+						<h2>Czym jest express.js?</h2>
+						<ul>
+							<li>Minimalistyczna biblioteka do pisania serwerów.</li>
+							<li>Szeroko wykorzystywany na środowiskach produkcjnych.</li>
+							<li>Bardziej popularny niż jego następca hapi.js</li>
+						</ul>
+						<pre><code>
+npm install express --save
+npm install body-parser --save
+						</code></pre>
+					</section>
+					<section>
+						<h2>Zaczynamy</h2>
+						<pre><code>
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => res.send('Hello world!'));
+
+app.listen(8080, () => console.log('Server started on port 8080'));
+						</code></pre>
+					</section>
+					<section>
+						<h2>Wykorzystanie lokalnych plików</h2>
+						<pre><code>
+app.use(express.static(__dirname + '/public/'));
+						</code></pre>
+					</section>
+					<section>
+						<img src="img/express_middleware.jpg"/>
+					</section>
+					<section>
+						<h2>Kolejność wywołania</h2>
+						<pre><code>
+app.get('/*', (req, res, next) => {
+    if (!req.query.authorized) {
+        res.status(401).send('Niezalogowany!');
+    } else {
+        next();
+    }
+});
+						</code></pre>
+					</section>
+					<section>
+						<h2>Router</h2>
+						<pre><code>
+const router = express.Router();
+
+router.get('/', (req, res) => res.send('Hello inner world!'));
+
+app.use('/inner', router);
+						</code></pre>
+					</section>
+					<section>
+						<h2>Response</h2>
+						<pre><code>
+app.get('/:id', (req, res) => {
+	// res.status(code)
+	// res.send(data)
+	// res.json(jsonData)
+	// https://expressjs.com/en/api.html#res
+});
+						</code></pre>
+					</section>
+					<section>
+						<h2>Request</h2>
+						<pre><code>
+app.get('/:id', (req, res) => {
+	// req.params
+	// req.query
+	// req.app
+	// https://expressjs.com/en/api.html#req
+});
+						</code></pre>
+					</section>
+					<section>
+						<h2>Request.body</h2>
+						<pre><code>
+constant bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+app.use(bodyParser.text());
+app.use(bodyParser.json());
+
+app.post('/:id', (req, res) => {
+	// req.body
+});
+						</code></pre>
+					</section>
+					<section>
+						<h2>Zadanie</h2>
+						<p>Napisać prosty serwer, który będzie zarządzał listą zadań (todo).</p>
+						<p>Powinien obsługiwać 3 zapytania:
+						<ul>
+							<li>GET /api/tasks</li>
+							<li>CREATE /api/task</li>
+							<li>DELETE /api/task/:index</li>
+						</ul>
+						</p>
+						<p>Do testowania serwera można wykorzystać swoje rozwiązanie kolokwium (wrzucając je do folderu public) lub za pomocą narzędzia <a href="https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop">Postman</a>.</p>
+					</section>
+				</section>
+			</div>
+		</div>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+		<script>
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				width: 1366,
+				height: 968,
+
+				theme: 'night', // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+	</body>
+</html>
