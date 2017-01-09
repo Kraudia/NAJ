@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Nowoczesne Aplikacje Internetowe [UAM]</title>
+
+		<meta name="author" content="Tadeusz Makuch">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+        <style type="text/css">
+            h1, h2, h3, h4, h5, h6 {
+                font-family: Calibri !important;
+                font-weight: 600 !important;
+            }
+            
+            .column-2 {
+                display: inline-block !important;
+                width: calc(40% - 50px) !important;
+            }
+            .column-2 > :first-child {
+                list-style-type: none !important;
+                font-size: 1.7em !important;
+            }
+        </style>
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Nowoczesne Aplikacje Internetowe</h1>
+                    <h3>Introduction to Angular 2</h3>
+					<p><b>Tadeusz Makuch</b><br />tadeusz.makuch@gft.com</p>
+                    <p><b>Andrzej Matłosz</b><br />andrzej.matlosz@gmail.com</p>
+					<p>Materiały: <a href="https://github.com/tmakuch/UAM">https://github.com/tmakuch/UAM</a></p>
+				</section>
+
+                <section>
+                    <h1>Tools</h1>
+                    <ul>
+                        <li>Visual Studio Code extensions- tslint, Codelyzer, angular 2 snippets</li>
+                        <li>Style guide, Project structure</li>
+                        <li>Angular-seed</li>
+                        <li>Augury chrome tool</li>
+                        <li>Angular-cli</li>
+                    </ul>
+                </section>
+
+                <section>
+                <section>
+                    <h1>Angular 2 architecture</h1>
+                    <img src="img/angular_arcghitecture.jpg" style="width:80%">
+                </section>
+
+                <section>
+                    <h3>Angular 2 application is build as component tree</h3>
+                    <img style="background: #0c4eb2; padding: 0 1em;" src="img/tree.svg" width="60%">
+                </section>
+                </section>
+                
+                <section>
+                    <section>
+                        <h1>Modules</h1>
+                    </section>
+
+                    <section>
+                        <p>Every Angular app has at least one module, the root module</p>
+                        <p>Features should be implemented in separate modules</p>
+                        <p>Module is defined by @NgModule decorator</p>
+                    </section>
+
+                    <section>
+                        <h3>@NgModule decorator</h3>
+                        <p>declarations - contain definition of view classes</p>
+                        <p>exports - define which declarations from module could be used in other templates</p>
+                        <p>imports - define which modules we used inside this module</p>
+                        <p>providers - definition of services from this module which will be accesible in all parts of the app</p>
+                        <p>bootstrap - root component. Property used only in root module</p>
+                    </section>
+
+                    <section>
+                        <h3>Bootstraping application</h3>
+                        <p>bootstrap code should be placed in main.ts file</p>
+                        <p>Angular offers a variety of bootstrapping options, targeting multiple platforms</p>
+                    </section>
+
+                    <section>
+                        <h3>Dynamic bootstraping with the Just-in-time compiler</h3>
+                        <pre><code>
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppModule } from './app.module';
+
+platformBrowserDynamic().bootstrapModule(AppModule);
+                        </code></pre>
+                    </section>
+                </section>
+
+<section class="stack">
+	<section>
+		<h1>Services</h1>
+	</section>
+
+	<section>
+		<p>Service must be defined with @Injectable decorator</p>
+		<p>Service must be put into providers declaration in module</p>
+		<p>Other elements could inject service in consturctor</p>
+		<pre><code>
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class UserService {
+  userName = 'Steve Kowalski';
+}
+</code></pre>
+	</section>
+
+	<section>
+		<pre><code>
+import { UserService } from './shared/user.service';
+
+@NgModule({
+  ...
+  providers: [ UserService ]
+  ...
+})
+export class AppModule { }
+		</code></pre>
+	</section>
+
+	<section>
+		<pre><code>
+@Component({
+  ...
+})
+export class TitleComponent {
+  userName: string;
+
+  constructor(private _userService: UserService) {
+    this.userName = _userService.userName;
+  }
+}
+		</code></pre>
+	</section>
+</section>
+
+<!--DATA BINDINGS-->
+<section class="stack">
+	<section>
+		<h1>Data Binding</h1>
+	</section>
+
+	<section>
+		<h3>4 binding options</h3>
+		<p>interpolation- {{someVariable}}</p>
+		<p>property binding - one way into the DOM [someProperty]</p>
+		<p>event binding- one way into the component (someEvent)</p>
+		<p>two way binding- should be used only in forms with ngModel (syntax is called "banana in the box") [(ngModel)]</p>
+	</section>
+</section>
+
+<!--COMPONENTS-->
+<section class="stack">
+	<section>
+		<h1>Components</h1>
+	</section>
+
+	<section>
+		<h3>@Component decorator</h3>
+		<p>template / templateUrl</p>
+		<p>selector</p>
+		<p>providers</p>
+		<p>styles / styleUrls</p>
+	</section>
+
+	<section>
+		<h3>Component sample</h3>
+		<pre><code>
+@Component({
+  selector: 'some-component',
+  template: `Text inside component`
+})
+export class SomeComponent {
+}
+		</code></pre>
+	</section>
+
+	<section>
+		<h3>Pass parameters into child component</h3>
+		<li>@Input decorator</li>
+		<pre><code>
+@Input() someProperty: PropertyType
+		</code></pre>
+		<li>inputs property in @Component decorator</li>
+		<pre><code>
+@Component({
+	...
+	selector: 'some-component',
+	inputs: ['someProperty']
+	...
+})
+export class SomeComponent
+		</code></pre>
+		<li>Using input parameters in other components template</li>
+		<pre><code>
+<some-component someProperty="value"></some-component>
+		</code></pre>
+	</section>
+
+	<section>
+		<h3>Input parameters could be defined with a setter ang getter</h3>
+		<pre><code>
+@Component({
+  selector: 'some-component',
+  template: `
+    <p>"{{myProperty}}"</p>
+  `
+})
+export class SomeComponent {
+  _myProperty: string = '';
+  
+  @Input()
+  set myProperty(myProperty: string) {
+    this._myProperty = myProperty || 'default value';
+  }
+
+  get myProperty() { return this._myProperty; }
+}
+		</code></pre>
+	</section>
+
+	<section>
+		<h3>Events from child into parent component</h3>
+		<p>@Output decorator or outputs property inside @ComponentDecorator</p>
+		<pre><code>
+@Component({
+  selector: 'some-component',
+  template: '<button (click)="someMethod()">Raise event</button>'
+})
+export class SomeComponent {
+  @Output() onSomeEvent: new EventEmitter&lt;string&gt;();
+  
+  someMethod() {
+  	this.onSomeEvent.emit('event value');
+  }
+}
+		</code></pre>
+	</section>
+
+    <section>
+		<h3>Sharing data by using service and RxJS</h3>
+		<pre><code>
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+
+export class SharedDataService {
+    private sharedDataSource = new Subject&lt;string>();
+
+    getSharedData() {
+        return this.sharedDataSource.asObservable();
+    }
+
+    addData(value: string) {
+        this.sharedDataSource.next(value);
+    }
+}
+		</code></pre>
+	</section>
+
+	<section>
+		<h3>Sharing data by using service and RxJS</h3>
+		<pre><code>
+export class SomeComponent {
+    constructor(private sharedDataService: SharedDataService) { }
+
+	addSomeData() {
+        this.sharedDataService.addData('some text');
+    }
+}
+		</code></pre>
+	</section>
+
+	<section>
+		<h3>Sharing data by using service and RxJS</h3>
+		<pre><code>
+export class ListComponent {
+	sharedData: string[] = [];
+
+    constructor(private sharedDataService: SharedDataService) {
+        this.sharedDataService.getSharedData().subscribe(
+            newValue => {
+                this.sharedData.push(newValue);
+            }
+        )
+    }
+}
+		</code></pre>
+	</section>
+</section>
+
+
+
+               
+                
+			</div>
+
+		</div>
+        
+        
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				width: 1366,
+				height: 968,
+
+				theme: 'night', // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,4 @@
+Utw�rz aplikacj� Lista todo. Ca�o�� wykonaj z u�yciem Angular 2.
+Zadania mo�na dodawa� za pomoc� przycisku.
+Ka�de zadanie mo�na usuwa� z listy oraz oznacza� jako zrobione.
+Pod list� powinna by� wyszukiwarka z w�asnym prostym algorytmem wyszukiwania.

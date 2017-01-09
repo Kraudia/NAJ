@@ -1,0 +1,4 @@
+Utwórz aplikacjê Lista todo. Ca³oœæ wykonaj z u¿yciem Typescript. Szablon rozwi¹xzania znajduje siê w pliku code.ts
+Zadania mo¿na dodawaæ za pomoc¹ przycisku.
+Ka¿de zadanie mo¿na usuwaæ z listy oraz oznaczaæ jako zrobione.
+Pod list¹ powinna byæ wyszukiwarka z w³asnym prostym algorytmem wyszukiwania.

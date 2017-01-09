@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Nowoczesne Aplikacje Internetowe [UAM]</title>
+
+		<meta name="author" content="Tadeusz Makuch">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+        <style type="text/css">
+            h1, h2, h3, h4, h5, h6 {
+                font-family: Calibri !important;
+                font-weight: 600 !important;
+            }
+            
+            .column-2 {
+                display: inline-block !important;
+                width: calc(40% - 50px) !important;
+            }
+            .column-2 > :first-child {
+                list-style-type: none !important;
+                font-size: 1.7em !important;
+            }
+        </style>
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Nowoczesne Aplikacje Internetowe</h1>
+                    <h3>Typescript</h3>
+					<p><b>Tadeusz Makuch</b><br />tadeusz.makuch@gft.com</p>
+                    <p><b>Andrzej Matłosz</b><br />andrzej.matlosz@gmail.com</p>
+					<p>Materiały: <a href="https://github.com/tmakuch/UAM">https://github.com/tmakuch/UAM</a></p>
+				</section>
+
+                <section>
+                    <h1>What is TypeScript</h1>
+                    <ul>
+                        <li>JavaScript + Types</li>
+                        <li>Compatible with JS libraries</li>
+                        <li>Designed for large applications</li>
+                        <li>Decent modules implementation</li>
+                        <li>Compile time errors</li>
+                        <li>Support from IDEs</li>
+                    </ul>
+                </section>
+                
+                <section>
+                    <h3>Basic Types</h3>
+                    <pre><code>
+let booleanVariable: boolean = false;
+let numberVariable: number = 6;
+let stringVariable: string = 'something';
+
+let array: number[] = [1, 2, 3];
+let arrayByGeneric: Array&lt;number> = [1, 2, 3];
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Basic Types</h3>
+                    <pre><code>
+let tupleType: [string, number];
+tupleType = ["hello", 10];
+
+enum Color {Red, Green, Blue};
+let c: Color = Color.Red;
+
+let uglyAnyVariable: any = 5;
+uglyAnyVariable = 'abc';
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Functions</h3>
+                    <pre><code>
+function add(x: number, y: number): number {
+    return x + y;
+}
+
+function funcWithOptionalParameter(s1: string, s2?: string) {
+    return s1 + ' ' + s2;
+}
+
+function funcWithDefaultParameter(s1: string, s2: string = 'default value') {
+    return s1 + ' ' + s2;
+}
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Function overloading</h3>
+                    <pre><code>
+function func(s1: string, s2: string): string;
+function func(s1: number, s2: number): number;
+function func(a, b): any {
+    if (typeof a === 'string') {
+        return a + ' ' + b;
+    } else {
+        return a + b;
+    }
+ }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Union types</h3>
+                    <pre><code>
+type StringOrNumber = string | number;
+
+function func(a: StringOrNumber, b: StringOrNumber): StringOrNumber {
+    if (typeof a === 'string' && typeof b === 'string') {
+        return a + ' ' + b;
+    } else if (typeof a === 'number' && typeof b === 'number') {
+        return a + b;
+    }
+ }
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Interface</h3>
+                    <pre><code>
+interface User {
+    name: string;
+    age: number
+}
+
+let me: User = {
+    name: 'Andrzej',
+    age: 30
+};
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Interface for Functions</h3>
+                    <pre><code>
+interface searchFunc {
+    (query: string, source: string) : boolean
+}
+
+let mySearch : searchFunc = (query: string, source: string) => {
+    return source.indexOf(query) >= 0;
+}
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Indexable Types</h3>
+                    <pre><code>
+interface StringArray {
+    [index: number]: string;
+}
+
+let myArray: StringArray;
+myArray = ['Bob', 'Fred'];
+myArray[2] = 'George';
+
+let myStr1: string = myArray[0];
+let myStr2: string = myArray[2];
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Classes</h3>
+                    <pre><code>
+class Greeter {
+    greeting: string;
+
+    constructor(message: string) {
+        this.greeting = message;
+    }
+
+    greet() {
+        return "Hello, " + this.greeting;
+    }
+}
+
+let greeter = new Greeter("world");
+greeter.greet();
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Instance properties</h3>
+                    <pre><code>
+class Person {
+    static someStaticAttr = 2;
+
+    private _id: number;
+    public age: number;
+    constructor(public name: string, public secondName: string, age: number) {
+        this.age = age;
+    }
+}
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Inheritance</h3>
+                    <pre><code>
+class Animal {
+    constructor(public name: string) { }
+    move(distanceInMeters: number = 0) {
+        console.log(`${this.name} moved ${distanceInMeters}m.`);
+    }
+}
+
+class Snake extends Animal {
+    constructor(name: string) { super(name); }
+    move(distanceInMeters = 5) {
+        console.log("Slithering...");
+        super.move(distanceInMeters);
+    }
+}
+
+class Horse extends Animal {
+    constructor(name: string) { super(name); }
+    move(distanceInMeters = 45) {
+        console.log("Galloping...");
+        super.move(distanceInMeters);
+    }
+}
+
+let sam: Snake = new Snake("Sammy the Python");
+let tom: Horse = new Horse("Tommy the Palomino");
+let joe: Animal = new Animal("Joe the unknown Animal");
+let animalArray: Array&lt;Animal> = [ sam, tom, joe ];
+
+sam.move(6);
+tom.move(34);
+joe.move(2);
+animalArray.forEach(animal => animal.move());
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Getters and Setters</h3>
+                    <pre><code>
+class Person {
+    
+    ...
+
+    get fullName():string {
+        return `${this.name} ${this.secondName}`;
+    }
+    
+    set fullName(value:string) {
+        //some parsing probably
+        this.name = valueOfName;
+        this.secondName = valueOfSecondName;
+    }
+}
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Class and Interface</h3>
+                    <pre><code>
+interface ClockInterface {
+    currentTime: Date;
+    setTime(d: Date);
+}
+
+class Clock implements ClockInterface {
+    currentTime: Date;
+    setTime(d: Date) {
+        this.currentTime = d;
+    }
+    constructor(h: number, m: number) { }
+}
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Generics Types</h3>
+                    <pre><code>
+class Greeter&lt;T> {
+    greeting: T;
+    constructor(message: T) {
+        this.greeting = message;
+    }
+    greet() {
+        return this.greeting;
+    }
+}
+
+let greeter = new Greeter&lt;string>("Hello, world");
+                    </code></pre>
+                </section>
+
+                <section class="stack">
+                    <section>
+                        <h1>Modules</h1>
+                    </section>
+
+                    <section>
+                        <h3>File as a module</h3>
+                        <pre><code>
+//file: services.ts
+
+// ... some module logic ...
+
+export let addtwo = (number) => { number + 2 };
+
+export class MyClass {
+    hi: string;
+    constructor() {
+      this.hi = 'Hi';
+    }
+}
+
+export const someNumber = 123;
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h3>Using a local module</h3>
+                        <pre><code>
+// file: app.js
+
+import * as services from "./services";
+
+let inst = new services.MyClass();
+
+let value = services.addtwo(services.someNumber);
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h3>Exporting</h3>
+                        <pre><code>
+export let someValue = 2;
+
+// OR
+
+export default class MyComponent() {}
+
+//OR
+
+export { someValue, someOtherValue, andEvenSomeClass }
+
+//OR
+
+export { someValue as betterName }
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h3>Importing</h3>
+                        <pre><code>
+import * as service from './service';
+
+import { someValue, MyClass } from './service';
+
+import { someValue as myLocalName } from './service';
+
+import MyComponent from './my_component'; //only if export default
+
+import './global_module'; // for side effects
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h3>Working with external modules</h3>
+                        <pre><code>
+> npm install lodash
+> npm install @angular/core
+                        </code></pre>
+
+                        <pre><code>
+import *  as _ from 'lodash';
+
+//Typescript will look for this dependency in node_modules directory
+
+import { Component, OnInit } from '@angular/core';
+                        </code></pre>
+                    </section>
+                </section>
+                
+			</div>
+
+		</div>
+        
+        
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				width: 1366,
+				height: 868,
+
+				theme: 'night', // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
