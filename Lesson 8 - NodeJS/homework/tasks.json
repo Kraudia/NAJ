@@ -1,0 +1,17 @@
+[
+	{
+		"id": 1483968520831,
+		"text": "do something",
+		"is_checked": true
+	},
+	{
+		"id": 1483968564206,
+		"text": "eat anything",
+		"is_checked": true
+	},
+	{
+		"id": 1483968571284,
+		"text": "sleep well",
+		"is_checked": false
+	}
+]
